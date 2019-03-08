@@ -1,4 +1,4 @@
-package pobj.tme4;
+package pobj.tme5;
 
 import java.util.AbstractCollection;
 import java.util.ArrayList;
@@ -84,6 +84,8 @@ public class HashMultiSet<T> extends AbstractCollection<T> implements MultiSet<T
 
 	@Override
 	public boolean add(T e, int count) {
+		if(count<=0)
+			throw new IllegalArgumentException("argument non valide, count doit être > 0 ");
 		for (int i =0; i<count; i++) {
 			this.add(e);
 		}
@@ -113,6 +115,8 @@ public class HashMultiSet<T> extends AbstractCollection<T> implements MultiSet<T
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean remove(Object e, int count) {
+		if(count<=0)
+			throw new IllegalArgumentException("argument non valide, count doit être > 0 ");
 		if ((this.count((T)e)!=0) && (count <= count((T) e))) {
 			hashMap.put((T) e, this.count((T)e)-count);
 			size -= this.count((T)e)-count;
@@ -211,5 +215,34 @@ public class HashMultiSet<T> extends AbstractCollection<T> implements MultiSet<T
 	public Comparator<T> getComparer() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		boolean first= true;
+		List<T> liste = this.elements();
+		sb.append("[");
+		for(T elem : hashMap.keySet()) {
+			if(first)
+				first=false;
+			else {
+				sb.append(elem);
+				sb.append(":");
+				sb.append(hashMap.get(elem).intValue());
+				sb.append("\n");
+			}
+		}
+		sb.append("]");
+		return sb.toString();
+	}
+	public boolean isConsistent() {
+		int siz = 0;
+		for(T elem : hashMap.keySet()) {
+			Integer nb = hashMap.get(elem);
+			if(nb==0 || nb<0) return false;
+			siz+=nb;
+		}
+		if(siz!= size) return false;
+		return true;	
 	}
 }

@@ -1,6 +1,7 @@
 package pobj.tme4;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
 public interface MultiSet<T> extends Collection<T>{
@@ -11,6 +12,6 @@ public interface MultiSet<T> extends Collection<T>{
 	public int count(T o);
 	public void clear();	
 	public int size();
-	List<T> elements();
-	
+	public List<T> elements();
+	public Comparator<T> getComparer();
 }

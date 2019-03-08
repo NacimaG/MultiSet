@@ -1,4 +1,4 @@
-package pobj.tme4;
+package pobj.tme5;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -15,8 +15,7 @@ public class WordCount {
 
 	
 	public static void wordcount(MultiSet<String> ms) throws IOException {
-		//String file = "C:\\Users\\Zahra\\eclipse-workspace\\multiset\\src\\pobj\\tme4\\Monfichier.txt";
-		String file = "data/TestNaive.txt";
+		String file = "data/WarAndPeace.txt";
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String line;
 		
@@ -30,9 +29,9 @@ public class WordCount {
 		
 		List<String> liste = ms.elements();
 		
-		liste.sort(ms.getComparer());
+		//liste.sort(ms.getComparer());
 
-		//Collections.sort(liste,(HashMultiSet<String>)ms);
+		Collections.sort(liste,(HashMultiSet<String>)ms);
 		
 		System.out.println("Les 10 mots les plus utilisés");
 		for(int i =0; i<10 ; i++) {
@@ -42,12 +41,14 @@ public class WordCount {
 	}
 	@Test
 	public void Test() {
-		MultiSet<String>ms= new NaiveMultiSet<>();
+		//MultiSet<String>ms= new NaiveMultiSet<>();
 		Chrono chrono = new Chrono();
-
-		//MultiSet<String>ms= new HashMultiSet<>();
+		
+		MultiSet<String>ms= new HashMultiSet<>();
 		try {
 			WordCount.wordcount(ms);
+			System.out.println(ms.toString());
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,5 +56,3 @@ public class WordCount {
 		chrono.stop();
 	}
 }
-
-

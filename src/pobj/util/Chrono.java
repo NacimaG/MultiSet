@@ -31,7 +31,7 @@ public class Chrono {
 			secondes = millis / 1000;
 			ms = millis - secondes * 1000;
 		} else {
-			System.out.println("temps Ã©coulÃ© : " + millis + " millisecondes");
+			System.out.println("temps écoulé : " + millis + " millisecondes");
 			return;
 		}
 		if (secondes > 60) {
